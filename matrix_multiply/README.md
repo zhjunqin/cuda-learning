@@ -54,8 +54,6 @@ Unroll Share mem Matrix multiply time(ms): 0.64683
 
 ![matrix_multply](./assets/matrix_multply.png)
 
-
 ## 参考文献
 1. cuda by practice: https://github.com/eegkno/CUDA_by_practice
 2. professional-cuda-c-programming: https://github.com/deeperlearning/professional-cuda-c-programming
-
