@@ -33,8 +33,8 @@ CUDA 可以组织三维的网格和块。网格和块的维度由下面两个内
 
 dim3 类型的变量中的每个组件可以通过它的 x, y, z 字段获得。
 
-  - blockDim.x, blockDim.y, blockDim.z
-  - gridDim.x, gridDim.x, gridDim.z
+    - blockDim.x, blockDim.y, blockDim.z
+    - gridDim.x, gridDim.x, gridDim.z
 
 一些示例：
 
