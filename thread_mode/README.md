@@ -9,16 +9,19 @@ CUDA 明确了线程层次抽象的概念以便于组织线程。这是一个两
 一个 Kernel 启动所产生的所有线程称为一个 Grid。同一个 Grid 中的所有线程共享相同的全局内存空间。一个网格由多个线程 block 构成，一个线程 block 包含一组线程。
 
 同一个线程 block 内的线程协作可以通过如下方式实现：
+
     - 同步
     - 共享内存
 
 不同 block 的线程不能协作。
 
 线程依赖以下两个坐标变量来区分彼此：
+
     - blockIdx：线程块在 Grid 内的索引
     - threadIdx： block 内的线程索引
 
 这些变量是 kernel 函数中预初始化的内置变量。这些变量是基于 uint3 定义的 CUDA 内置的向量类型，是一个包含 3 个无符号整数的结构，可以通过 x,y,z 三个字段来指定。
+
     - blockIdx.x, blockIdx.y, blockIdx.z
     - threadIdx.x, threadIdx.y, threadIdx.z
 
