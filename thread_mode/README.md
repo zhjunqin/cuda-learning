@@ -32,6 +32,7 @@ CUDA 可以组织三维的网格和块。网格和块的维度由下面两个内
 他们是 dim3 类型的变量，是基于 unint3 定义的整数型变量，用来表示维度。当定义一个 dim3 类型的变量时，所有未指定的元素都被初始化为 1。
 
 dim3 类型的变量中的每个组件可以通过它的 x, y, z 字段获得。
+
   - blockDim.x, blockDim.y, blockDim.z
   - gridDim.x, gridDim.x, gridDim.z
 
@@ -46,7 +47,6 @@ dim3 类型的变量中的每个组件可以通过它的 x, y, z 字段获得。
 在代码中打印 grid 和 block 的索引和维度
 
 ```
-
 __global__ void printIndex(void) {
     printf("threadIdx(%d, %d, %d); blockIdx(%d, %d, %d); blockDim(%d, %d, %d); gridDim(%d, %d, %d)\n",
            threadIdx.x, threadIdx.y, threadIdx.z, blockIdx.x, blockIdx.y, blockIdx.z,
@@ -57,7 +57,6 @@ __global__ void printIndex(void) {
 dim3 block(2,3);
 dim3 grid(2);
 printIndex<<<grid, block>>>();
-
 ```
 
 打印结果如下：
@@ -66,7 +65,6 @@ printIndex<<<grid, block>>>();
 
 每个 block 总共 2*3=6 个 thread，thread 的 index x 维度为 0-1，y 维度为 0-2
 ```
-
 threadIdx(0, 0, 0); blockIdx(1, 0, 0); blockDim(2, 3, 1); gridDim(2, 1, 1)
 threadIdx(1, 0, 0); blockIdx(1, 0, 0); blockDim(2, 3, 1); gridDim(2, 1, 1)
 threadIdx(0, 1, 0); blockIdx(1, 0, 0); blockDim(2, 3, 1); gridDim(2, 1, 1)
@@ -80,7 +78,6 @@ threadIdx(0, 1, 0); blockIdx(0, 0, 0); blockDim(2, 3, 1); gridDim(2, 1, 1)
 threadIdx(1, 1, 0); blockIdx(0, 0, 0); blockDim(2, 3, 1); gridDim(2, 1, 1)
 threadIdx(0, 2, 0); blockIdx(0, 0, 0); blockDim(2, 3, 1); gridDim(2, 1, 1)
 threadIdx(1, 2, 0); blockIdx(0, 0, 0); blockDim(2, 3, 1); gridDim(2, 1, 1)
-
 ```
 
 ## kernel 函数
@@ -104,5 +101,5 @@ CUDA kernel 调用是对 C 语言函数调用的延伸，`<<<>>>` 运算符内�
 
 如上的 kernel 函数调用 `printIndex<<<grid, block>>>();` 是异步的，host 执行不会阻塞，如果没有执行同步的调用，那么 Host 主程序会直接退出。
 
-比如调用 `cudaDeviceSynchronize()`
+可以调用 `cudaDeviceSynchronize()` 来让 host 阻塞等待 kernel 函数执行完成。
 
